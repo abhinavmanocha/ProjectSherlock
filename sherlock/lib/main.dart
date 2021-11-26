@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'stain_parameters.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MaterialApp(
+    title: 'Sherlock',
+    home: MyApp(),
+  ));
 }
 
 @immutable
@@ -34,6 +38,17 @@ class MyApp extends StatelessWidget {
                       color: Colors.grey[900],
                     ),
                   ),
+                  ElevatedButton(
+                    child: Text('Go to Stain Parameters'),
+                    onPressed: () {
+                      // Navigate to second route when tapped.
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const StainParameters()),
+                      );
+                    },
+                  )
                 ], // children
               )),
         ));
