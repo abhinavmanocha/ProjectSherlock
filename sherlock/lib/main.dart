@@ -25,15 +25,6 @@ class MyApp extends StatelessWidget {
                     height: 85,
                     fit: BoxFit.fitWidth,
                   ),
-// Sherlock title and version number
-                  Text(
-                    'Sherlock Ver: 0.1.0',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey[900],
-                    ),
-                  ),
                 ], // children
               )),
         ));
