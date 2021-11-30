@@ -1,7 +1,7 @@
 enum stain_comment {
   none,
   badAlphaValue,
-  badGammeValue,
+  badGammaValue,
   badYOrZCoord,
 }
 
@@ -12,7 +12,7 @@ class Stain {
   double yCoord = 0.0;
   double zCoord = 0.0;
   bool include = true;
-  stain_comment comment = stain_comment.none;
+  stain_comment? comment = stain_comment.none; // ? means it can be null
 
   // constructors
   Stain(this.id, this.alphaAngle, this.gammaAngle, this.yCoord, this.zCoord,

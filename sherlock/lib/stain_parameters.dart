@@ -11,12 +11,8 @@ class StainParameters extends StatelessWidget {
   final GlobalKey<FormState> _formkey = GlobalKey();
   Dataset data = Dataset("", "", 0);
 
-  StainParameters(String team, String pattern, int stains, {Key? key})
-      : super(key: key) {
-    data.teamName = team;
-    data.patternID = pattern;
-    data.numStains = stains;
-  }
+  // constructor
+  StainParameters(this.data, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -129,12 +125,7 @@ class StainParametersFormState extends State<StainParametersForm> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-
-  // hard-coded values to be removed later
-  bool include = true;
-  String comment = "";
   Dataset data = Dataset("", "", 0);
-  int i = 0;
 
   // constructor
   StainParametersFormState(this.data);
@@ -147,7 +138,7 @@ class StainParametersFormState extends State<StainParametersForm> {
       child: Column(
         children: <Widget>[
 // --- All the form fields go here --------------------------------------------
-          for (i = 0; i < data.numStains; ++i) formBox(i + 1),
+          for (int i = 0; i < data.numStains; ++i) formBox(i + 1),
         ],
       ),
     );
@@ -181,6 +172,7 @@ class StainParametersFormState extends State<StainParametersForm> {
                     height: 40,
                     child: TextFormField(
                       decoration: const InputDecoration(labelText: "α Angle"),
+                      keyboardType: TextInputType.number,
                     )),
                 const SizedBox(
                   width: 10,
@@ -190,6 +182,7 @@ class StainParametersFormState extends State<StainParametersForm> {
                     height: 40,
                     child: TextFormField(
                       decoration: const InputDecoration(labelText: "γ Angle"),
+                      keyboardType: TextInputType.number,
                     )),
               ],
             ),
@@ -200,6 +193,7 @@ class StainParametersFormState extends State<StainParametersForm> {
                     height: 40,
                     child: TextFormField(
                       decoration: const InputDecoration(labelText: "Y Coord."),
+                      keyboardType: TextInputType.number,
                     )),
                 const SizedBox(
                   width: 10,
@@ -209,6 +203,7 @@ class StainParametersFormState extends State<StainParametersForm> {
                     height: 40,
                     child: TextFormField(
                       decoration: const InputDecoration(labelText: "Z Coord."),
+                      keyboardType: TextInputType.number,
                     )),
               ],
             ),
@@ -221,38 +216,38 @@ class StainParametersFormState extends State<StainParametersForm> {
                       return SizedBox(
                           width: 60,
                           child: Switch(
-                              value: include,
+                              value: data.stains[stainID - 1].include,
                               onChanged: (bool val) {
                                 setState(() {
-                                  include = val;
+                                  data.stains[stainID - 1].include = val;
                                 });
                               }));
                     }),
                 SizedBox(
                     width: 200,
-                    child: DropdownButtonFormField(
+                    child: DropdownButtonFormField<stain_comment>(
                       hint: const Text("Comment"),
                       items: const [
-                        DropdownMenuItem(
-                          value: "",
+                        DropdownMenuItem<stain_comment>(
+                          value: stain_comment.none,
                           child: Text(""),
                         ),
-                        DropdownMenuItem(
-                          value: "Bad alpha value",
+                        DropdownMenuItem<stain_comment>(
+                          value: stain_comment.badAlphaValue,
                           child: Text("Bad alpha value"),
                         ),
-                        DropdownMenuItem(
-                          value: "Bad gamma value",
+                        DropdownMenuItem<stain_comment>(
+                          value: stain_comment.badGammaValue,
                           child: Text("Bad gamma value"),
                         ),
-                        DropdownMenuItem(
-                          value: "Bad Y or Z coordinate",
+                        DropdownMenuItem<stain_comment>(
+                          value: stain_comment.badYOrZCoord,
                           child: Text("Bad Y or Z coordinate"),
                         )
                       ],
                       onChanged: (value) {
                         setState(() {
-                          comment = value.toString();
+                          data.stains[stainID - 1].comment = value;
                         });
                       },
                     ))

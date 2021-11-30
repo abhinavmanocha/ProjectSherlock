@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 import 'stain_parameters.dart';
+import 'dataset.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     title: 'Sherlock',
-    home: MyApp(),
+    home: Sherlock(),
   ));
 }
 
 @immutable
-// ignore: must_be_immutable
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-
-  String teamName = "Example Team";
-  String patternID = "Example Pattern";
-  int numStains = 20;
+class Sherlock extends StatelessWidget {
+  const Sherlock({Key? key}) : super(key: key);
 
   // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
+    Dataset data = Dataset("Example Team", "Example Pattern", 20);
     return MaterialApp(
         title: 'Sherlock',
         home: Scaffold(
@@ -50,8 +47,7 @@ class MyApp extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => StainParameters(
-                                teamName, patternID, numStains)),
+                            builder: (context) => StainParameters(data)),
                       );
                     },
                   )
