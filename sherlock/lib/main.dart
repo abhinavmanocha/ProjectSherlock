@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'stain_parameters.dart';
 
 void main() {
-  runApp(const MaterialApp(
+  runApp(MaterialApp(
     title: 'Sherlock',
     home: MyApp(),
   ));
 }
 
 @immutable
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+
+  String teamName = "Example Team";
+  String patternID = "Example Pattern";
+  int numStains = 20;
 
   // This widget is the root of the application.
   @override
@@ -39,13 +44,14 @@ class MyApp extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    child: Text('Go to Stain Parameters'),
+                    child: const Text('Go to Stain Parameters'),
                     onPressed: () {
                       // Navigate to second route when tapped.
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => StainParameters()),
+                            builder: (context) => StainParameters(
+                                teamName, patternID, numStains)),
                       );
                     },
                   )

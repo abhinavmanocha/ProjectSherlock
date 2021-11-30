@@ -1,15 +1,33 @@
 import 'package:flutter/material.dart';
+import 'dataset.dart';
 
 Color sherlockGrey = const Color(0xFF7C7C7C);
 Color sherlockDarkGreen = const Color(0xFF215A47);
 Color sherlockBorderGreen = const Color(0xFF028958);
 Color sherlockLightGreen = const Color(0xFFE8F3F5);
 
+// ignore: must_be_immutable
 class StainParameters extends StatelessWidget {
   final GlobalKey<FormState> _formkey = GlobalKey();
+  Dataset data = Dataset("", "", 0);
+
+  StainParameters(String team, String pattern, int stains, {Key? key})
+      : super(key: key) {
+    data.teamName = team;
+    data.patternID = pattern;
+    data.numStains = stains;
+  }
 
   @override
   Widget build(BuildContext context) {
+    String infoText =
+        "Please enter/edit your blood spatter data in the following table."
+                " Your team name and pattern ID will be used to automatically save"
+                " your data for you when you run the analysis."
+                "\n\nTeam Name: " +
+            data.teamName +
+            "\nPattern ID: " +
+            data.patternID;
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -51,28 +69,55 @@ class StainParameters extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(20),
                           child: Text(
-                            "Please enter/edit your blood spatter data in the following table."
-                            " Your team name and pattern ID will be used to automatically save"
-                            " your data for you when you run the analysis.",
+                            infoText,
                             style: TextStyle(
                               fontSize: 16,
                               color: sherlockGrey,
                             ),
                           ),
                         ),
-                        const StainParametersForm(),
+                        StainParametersForm(data),
                       ]),
-                    )))));
+                    )))),
+        bottomNavigationBar: BottomAppBar(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: ElevatedButton(
+              onPressed: () {
+                // Navigate to results screen
+                // TO DO
+              },
+              child: const Text(
+                "Process Data",
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(300, 60),
+                  primary: sherlockDarkGreen,
+                  padding: const EdgeInsets.all(20),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20))),
+            ),
+          ),
+        ));
   }
 } // --- End Stain Parameters Class
 
 // Define a custom Form widget.
+// ignore: must_be_immutable
 class StainParametersForm extends StatefulWidget {
-  const StainParametersForm({Key? key}) : super(key: key);
+  Dataset data = Dataset("", "", 0);
+
+  // constructor
+  StainParametersForm(this.data, {Key? key}) : super(key: key);
 
   @override
   StainParametersFormState createState() {
-    return StainParametersFormState();
+    // ignore: no_logic_in_create_state
+    return StainParametersFormState(data);
   }
 }
 
@@ -88,7 +133,11 @@ class StainParametersFormState extends State<StainParametersForm> {
   // hard-coded values to be removed later
   bool include = true;
   String comment = "";
-  int numStains = 20;
+  Dataset data = Dataset("", "", 0);
+  int i = 0;
+
+  // constructor
+  StainParametersFormState(this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +147,7 @@ class StainParametersFormState extends State<StainParametersForm> {
       child: Column(
         children: <Widget>[
 // --- All the form fields go here --------------------------------------------
-          for (int i = 0; i < numStains; ++i) formBox(i + 1),
+          for (i = 0; i < data.numStains; ++i) formBox(i + 1),
         ],
       ),
     );
