@@ -5,14 +5,14 @@ Color sherlockGrey = const Color(0xFF7C7C7C);
 Color sherlockDarkGreen = const Color(0xFF215A47);
 Color sherlockBorderGreen = const Color(0xFF028958);
 Color sherlockLightGreen = const Color(0xFFE8F3F5);
+Dataset data = Dataset("", "", 0);
 
 // ignore: must_be_immutable
 class StainParameters extends StatelessWidget {
-  final GlobalKey<FormState> _formkey = GlobalKey();
-  Dataset data = Dataset("", "", 0);
-
   // constructor
-  StainParameters(this.data, {Key? key}) : super(key: key);
+  StainParameters(Dataset dataset, {Key? key}) : super(key: key) {
+    data = dataset;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class StainParameters extends StatelessWidget {
                             ),
                           ),
                         ),
-                        StainParametersForm(data),
+                        const StainParametersForm(),
                       ]),
                     )))),
         bottomNavigationBar: BottomAppBar(
@@ -103,17 +103,14 @@ class StainParameters extends StatelessWidget {
 } // --- End Stain Parameters Class
 
 // Define a custom Form widget.
-// ignore: must_be_immutable
 class StainParametersForm extends StatefulWidget {
-  Dataset data = Dataset("", "", 0);
-
   // constructor
-  StainParametersForm(this.data, {Key? key}) : super(key: key);
+  const StainParametersForm({Key? key}) : super(key: key);
 
   @override
   StainParametersFormState createState() {
     // ignore: no_logic_in_create_state
-    return StainParametersFormState(data);
+    return StainParametersFormState();
   }
 }
 
@@ -125,10 +122,6 @@ class StainParametersFormState extends State<StainParametersForm> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-  Dataset data = Dataset("", "", 0);
-
-  // constructor
-  StainParametersFormState(this.data);
 
   @override
   Widget build(BuildContext context) {
