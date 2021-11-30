@@ -26,7 +26,8 @@ class Dataset {
   int numStains = 0;
   List<Stain> stains = List.empty(growable: true);
 
-  // constructor
+  // constructors
+  Dataset.empty();
   Dataset(this.teamName, this.patternID, this.numStains) {
     // initialize list of stains
     for (int i = 1; i <= numStains; ++i) {

@@ -5,7 +5,7 @@ Color sherlockGrey = const Color(0xFF7C7C7C);
 Color sherlockDarkGreen = const Color(0xFF215A47);
 Color sherlockBorderGreen = const Color(0xFF028958);
 Color sherlockLightGreen = const Color(0xFFE8F3F5);
-Dataset data = Dataset("", "", 0);
+Dataset data = Dataset.empty();
 
 // ignore: must_be_immutable
 class StainParameters extends StatelessWidget {
