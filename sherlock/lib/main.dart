@@ -16,7 +16,7 @@ class Sherlock extends StatelessWidget {
   // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
-    Dataset data = Dataset("Example Team", "Example Pattern", 20);
+    Dataset data = Dataset("Example Team", "Example Pattern", 3);
     return MaterialApp(
         title: 'Sherlock',
         home: Scaffold(

@@ -1,13 +1,21 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'dataset.dart';
 
 Color sherlockGrey = const Color(0xFF7C7C7C);
 Color sherlockDarkGreen = const Color(0xFF215A47);
 Color sherlockBorderGreen = const Color(0xFF028958);
 Color sherlockLightGreen = const Color(0xFFE8F3F5);
-Dataset data = Dataset.empty();
 
-// ignore: must_be_immutable
+// dataset object where all of the stain parameters will be stored
+Dataset data = Dataset.empty();
+// global form key uniquely identifies the Form widget and allows validation
+final _formKey = GlobalKey<FormState>();
+
 class StainParameters extends StatelessWidget {
   // constructor
   StainParameters(Dataset dataset, {Key? key}) : super(key: key) {
@@ -81,8 +89,7 @@ class StainParameters extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: ElevatedButton(
               onPressed: () {
-                // Navigate to results screen
-                // TO DO
+                StainParametersFormState.processForm();
               },
               child: const Text(
                 "Process Data",
@@ -109,20 +116,12 @@ class StainParametersForm extends StatefulWidget {
 
   @override
   StainParametersFormState createState() {
-    // ignore: no_logic_in_create_state
     return StainParametersFormState();
   }
 }
 
 // This class holds data related to the form.
 class StainParametersFormState extends State<StainParametersForm> {
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
-  //
-  // Note: This is a `GlobalKey<FormState>`,
-  // not a GlobalKey<MyCustomFormState>.
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -161,47 +160,100 @@ class StainParametersFormState extends State<StainParametersForm> {
             Row(
               children: [
                 SizedBox(
+                    // --- α Angle --------------------------------------------
                     width: 150,
                     height: 40,
                     child: TextFormField(
                       decoration: const InputDecoration(labelText: "α Angle"),
                       keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            double.tryParse(value) == null) {
+                          return "Enter a number";
+                        }
+                        setState(() {
+                          data.stains[stainID - 1].alphaAngle =
+                              double.parse(value);
+                        });
+                        return null;
+                      },
                     )),
                 const SizedBox(
+                  // whitespace
                   width: 10,
                 ),
                 SizedBox(
+                    // --- γ Angle --------------------------------------------
                     width: 150,
                     height: 40,
                     child: TextFormField(
                       decoration: const InputDecoration(labelText: "γ Angle"),
                       keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            double.tryParse(value) == null) {
+                          return "Enter a number";
+                        }
+                        setState(() {
+                          data.stains[stainID - 1].gammaAngle =
+                              double.parse(value);
+                        });
+                        return null;
+                      },
                     )),
               ],
             ),
             Row(
               children: [
                 SizedBox(
+                    // --- Y Coordinate ---------------------------------------
                     width: 150,
                     height: 40,
                     child: TextFormField(
                       decoration: const InputDecoration(labelText: "Y Coord."),
                       keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            double.tryParse(value) == null) {
+                          return "Enter a number";
+                        }
+                        setState(() {
+                          data.stains[stainID - 1].yCoord = double.parse(value);
+                        });
+                        return null;
+                      },
                     )),
                 const SizedBox(
+                  // whitespace
                   width: 10,
                 ),
                 SizedBox(
+                    // --- Z Coordinate ---------------------------------------
                     width: 150,
                     height: 40,
                     child: TextFormField(
                       decoration: const InputDecoration(labelText: "Z Coord."),
                       keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            double.tryParse(value) == null) {
+                          return "Enter a number";
+                        }
+                        setState(() {
+                          data.stains[stainID - 1].zCoord = double.parse(value);
+                        });
+                        return null;
+                      },
                     )),
               ],
             ),
             Row(
               children: [
+                // --- Include ------------------------------------------------
                 const Text("Include"),
                 FormField(
                     initialValue: true,
@@ -210,13 +262,14 @@ class StainParametersFormState extends State<StainParametersForm> {
                           width: 60,
                           child: Switch(
                               value: data.stains[stainID - 1].include,
-                              onChanged: (bool val) {
+                              onChanged: (bool value) {
                                 setState(() {
-                                  data.stains[stainID - 1].include = val;
+                                  data.stains[stainID - 1].include = value;
                                 });
                               }));
                     }),
                 SizedBox(
+                    // --- Comment --------------------------------------------
                     width: 200,
                     child: DropdownButtonFormField<stain_comment>(
                       hint: const Text("Comment"),
@@ -249,4 +302,60 @@ class StainParametersFormState extends State<StainParametersForm> {
           ],
         ));
   } // --- End formBox function
+
+  static Future<File?> processForm() async {
+    if (_formKey.currentState!.validate()) {
+      // if form is valid, save dataset to csv file, then go to next page
+      // first create the text string that will be written to the file
+      String fileText = "Number of data points:" +
+          data.numStains.toString() +
+          ":\n" +
+          data.teamName +
+          ":" +
+          data.patternID +
+          ":\n";
+      // data for each stain
+      for (int i = 0; i < data.numStains; ++i) {
+        fileText += data.stains[i].alphaAngle.toString() +
+            ":" +
+            data.stains[i].gammaAngle.toString() +
+            ":" +
+            data.stains[i].yCoord.toString() +
+            ":" +
+            data.stains[i].zCoord.toString() +
+            ":";
+        if (data.stains[i].include) {
+          fileText += "Y:";
+        } else {
+          fileText += "N:";
+        }
+        fileText += data.stains[i].comment.toString() + ":\n";
+      }
+
+      // write the actual file
+      return writeFile(fileText);
+    }
+    return null;
+  } // --- End processForm function
+
+  // get documents directory path
+  static Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
+
+  // set local file path
+  static Future<File> get _localFile async {
+    final path = await _localPath;
+    String filepath = "$path/" + data.teamName + "_" + data.patternID + ".csv";
+    return File(filepath).create(recursive: true);
+  }
+
+  // write data to file
+  static Future<File> writeFile(String data) async {
+    final file = await _localFile;
+
+    // Write the file
+    return file.writeAsString(data);
+  }
 } // --- End StainParametersFormState
