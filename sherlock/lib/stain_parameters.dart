@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dataset.dart';
+import 'results.dart';
 
 Color sherlockGrey = const Color(0xFF7C7C7C);
 Color sherlockDarkGreen = const Color(0xFF215A47);
@@ -88,8 +88,13 @@ class StainParameters extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: ElevatedButton(
-              onPressed: () {
-                StainParametersFormState.processForm();
+              onPressed: () async {
+                if (await StainParametersFormState.processForm()) {
+                  // if form submission was successful, go to results page
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Results(data)),
+                  );
+                }
               },
               child: const Text(
                 "Process Data",
@@ -303,7 +308,7 @@ class StainParametersFormState extends State<StainParametersForm> {
         ));
   } // --- End formBox function
 
-  static Future<File?> processForm() async {
+  static Future<bool> processForm() async {
     if (_formKey.currentState!.validate()) {
       // if form is valid, save dataset to csv file, then go to next page
       // first create the text string that will be written to the file
@@ -333,9 +338,10 @@ class StainParametersFormState extends State<StainParametersForm> {
       }
 
       // write the actual file
-      return writeFile(fileText);
+      writeFile(fileText);
+      return true;
     }
-    return null;
+    return false;
   } // --- End processForm function
 
   // get documents directory path

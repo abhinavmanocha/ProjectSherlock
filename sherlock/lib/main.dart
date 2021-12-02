@@ -1,58 +1,85 @@
+//Page 1 Splash Screen
 import 'package:flutter/material.dart';
-import 'stain_parameters.dart';
-import 'dataset.dart';
+import 'data_mode.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    title: 'Sherlock',
-    home: Sherlock(),
-  ));
+  runApp(const SherlockApp());
 }
 
-@immutable
-class Sherlock extends StatelessWidget {
-  const Sherlock({Key? key}) : super(key: key);
+class SherlockApp extends StatelessWidget {
+  const SherlockApp({Key? key}) : super(key: key);
 
-  // This widget is the root of the application.
+  // Root of the App Widget.
   @override
   Widget build(BuildContext context) {
-    Dataset data = Dataset("Example Team", "Example Pattern", 3);
     return MaterialApp(
-        title: 'Sherlock',
         home: Scaffold(
-          body: Container(
-              padding: const EdgeInsets.fromLTRB(0, 32, 0, 0),
-              child: Column(
-                children: [
-// Trent Forensics logo image
-                  Image.asset(
-                    'images/forensics_logo.jpg',
-                    width: 435,
-                    height: 85,
-                    fit: BoxFit.fitWidth,
-                  ),
-// Sherlock title and version number
-                  Text(
-                    'Sherlock Ver: 0.1.0',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey[900],
+            body: Container(
+                color: const Color(0xFF215A47),
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8.0,
+                      horizontal: 32.0,
                     ),
-                  ),
-                  ElevatedButton(
-                    child: const Text('Go to Stain Parameters'),
-                    onPressed: () {
-                      // Navigate to second route when tapped.
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => StainParameters(data)),
-                      );
-                    },
-                  )
-                ], // children
-              )),
-        ));
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Image.asset('images/forensics_logo.jpg'),
+                          Image.asset('images/sherlock_logo_green.png'),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 8.0),
+                            child: Text(
+                              '',
+                              softWrap: true,
+                              style: TextStyle(
+                                fontSize: 40,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.all(20),
+                            child: Text(
+                              'NOTE: Sherlock was designed for student training purposes '
+                              'only, we do not guarantee that the results are 100% accurate. '
+                              'Trent University assumes no responsibility or liability should '
+                              'you attempt to use the software in a criminal or civil court case.',
+                              softWrap: true,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(top: 16.0, bottom: 16.0),
+                            child: Builder(
+                              builder: (context) {
+                                return ElevatedButton(
+                                  child: const Text(
+                                    'Agree and Continue',
+                                    softWrap: true,
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const DataMode()),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ])))));
   }
 }
