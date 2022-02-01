@@ -60,7 +60,7 @@ class SherlockApp extends StatelessWidget {
                               builder: (context) {
                                 return ElevatedButton(
                                   child: const Text(
-                                    'Agree and Continue',
+                                    'Open',
                                     softWrap: true,
                                     style: TextStyle(
                                       color: Colors.red,
