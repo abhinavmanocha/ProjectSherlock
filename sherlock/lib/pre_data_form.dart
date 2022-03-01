@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'stain_parameters.dart';
 import 'dataset.dart';
+import 'files.dart';
 
-//stain para
 class LoadFileForm extends StatelessWidget {
   const LoadFileForm({Key? key}) : super(key: key);
 
@@ -36,31 +36,56 @@ class _LoadFileBodyFormState extends State<LoadFileBodyForm> {
   final _formKey = GlobalKey<FormState>();
   final FocusNode _chooseFileFocusNode = FocusNode();
   final TextEditingController _chooseFileController = TextEditingController();
+  String filename = ""; // name of file to load
 
-  _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      final data = Dataset.empty();
+  _submitForm() async {
+    if (_formKey.currentState!.validate() || filename == "sample") {
+      // open file and save contents to list, each item is one row,
+      // each sub-item is one column in that row
+      List<List<String>> fileContents = await FileManager.readFile(filename);
 
-      // open file and save info to dataset object
-      // TO DO !!
-
-      // If the form passes validation, display a Snackbar.
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Form submitted')));
-
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => StainParameters(data)),
-      );
+      // make sure the file exists and has content
+      if (fileContents.isNotEmpty) {
+        // create dataset with team name, pattern ID, and number of stains
+        final data = Dataset(fileContents[1][0], fileContents[1][1],
+            int.parse(fileContents[0][1]));
+        // add data for each stain
+        for (int i = 2;
+            i < fileContents.length && i < data.numStains + 2;
+            ++i) {
+          data.stains[i - 2].alphaAngle = double.parse(fileContents[i][0]);
+          data.stains[i - 2].gammaAngle = double.parse(fileContents[i][1]);
+          data.stains[i - 2].yCoord = double.parse(fileContents[i][2]);
+          data.stains[i - 2].zCoord = double.parse(fileContents[i][3]);
+          // include is true by default, so don't need else here
+          if (fileContents[i][4] == "N") {
+            data.stains[i - 2].include = false;
+          }
+          // comment is none by default so no need to check for that
+          if (fileContents[i][5] == "stain_comment.badAlphaValue") {
+            data.stains[i - 2].comment = stain_comment.badAlphaValue;
+          } else if (fileContents[i][5] == "stain_comment.badGammaValue") {
+            data.stains[i - 2].comment = stain_comment.badGammaValue;
+          } else if (fileContents[i][5] == "stain_comment.badYOrZCoord") {
+            data.stains[i - 2].comment = stain_comment.badYOrZCoord;
+          }
+        }
+        // navigate to stain parameters page, passing the loaded data
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => StainParameters(data)),
+        );
+      } else {
+        // if the file does not exist, display a Snackbar.
+        String error = "ERROR: File " + filename + " not found";
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(error)));
+      }
     }
-  }
-
-  _nextFocus(FocusNode focusNode) {
-    FocusScope.of(context).requestFocus(focusNode);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Padding(
@@ -85,7 +110,7 @@ class _LoadFileBodyFormState extends State<LoadFileBodyForm> {
                 padding: EdgeInsets.only(bottom: 18),
                 child: Text(
                   'If your data is already in a file, type in the filename '
-                  'and press LOAD.',
+                  'and press LOAD.\n\nExample: teamname_patternID.csv',
                 ),
               ),
               Padding(
@@ -101,8 +126,8 @@ class _LoadFileBodyFormState extends State<LoadFileBodyForm> {
                     }
                     return null;
                   },
-                  onFieldSubmitted: (String value) {
-                    _submitForm();
+                  onChanged: (value) {
+                    filename = value;
                   },
                   decoration: const InputDecoration(
                     hintText: 'Choose file',
@@ -123,8 +148,32 @@ class _LoadFileBodyFormState extends State<LoadFileBodyForm> {
                         style: ElevatedButton.styleFrom(
                           primary: Colors.teal,
                           onPrimary: Colors.white,
-                          padding: EdgeInsets.all(20),
-                          minimumSize: Size(200, 20),
+                          padding: const EdgeInsets.all(20),
+                          minimumSize: const Size(200, 20),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 16,
+                      ),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          filename = "sample";
+                          _submitForm();
+                        },
+                        child: const Text('Load Sample Data'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                          onPrimary: Colors.teal,
+                          padding: const EdgeInsets.all(20),
+                          minimumSize: const Size(200, 20),
                         ),
                       ),
                     ),

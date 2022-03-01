@@ -7,10 +7,10 @@ enum stain_comment {
 
 class Stain {
   int id = 0;
-  double alphaAngle = 0.0;
-  double gammaAngle = 0.0;
-  double yCoord = 0.0;
-  double zCoord = 0.0;
+  double? alphaAngle;
+  double? gammaAngle;
+  double? yCoord;
+  double? zCoord;
   bool include = true;
   stain_comment? comment = stain_comment.none; // ? means it can be null
 

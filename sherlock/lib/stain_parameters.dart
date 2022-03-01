@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'dataset.dart';
 import 'results.dart';
+import 'files.dart';
 
 Color sherlockGrey = const Color(0xFF7C7C7C);
 Color sherlockDarkGreen = const Color(0xFF215A47);
@@ -144,6 +143,18 @@ class StainParametersFormState extends State<StainParametersForm> {
   // This function creates the form fields for each stain
   Widget formBox(int stainID) {
     String stain = "Stain Number " + stainID.toString();
+    String? alphaAngle = (data.stains[stainID - 1].alphaAngle == null)
+        ? null
+        : data.stains[stainID - 1].alphaAngle.toString();
+    String? gammaAngle = (data.stains[stainID - 1].gammaAngle == null)
+        ? null
+        : data.stains[stainID - 1].gammaAngle.toString();
+    String? yCoord = (data.stains[stainID - 1].yCoord == null)
+        ? null
+        : data.stains[stainID - 1].yCoord.toString();
+    String? zCoord = (data.stains[stainID - 1].zCoord == null)
+        ? null
+        : data.stains[stainID - 1].zCoord.toString();
     return Container(
         width: 340,
         height: 180,
@@ -169,8 +180,9 @@ class StainParametersFormState extends State<StainParametersForm> {
                     width: 150,
                     height: 40,
                     child: TextFormField(
-                      decoration: const InputDecoration(labelText: "α Angle"),
+                      decoration: const InputDecoration(hintText: "α Angle"),
                       keyboardType: TextInputType.number,
+                      initialValue: alphaAngle,
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
@@ -193,8 +205,9 @@ class StainParametersFormState extends State<StainParametersForm> {
                     width: 150,
                     height: 40,
                     child: TextFormField(
-                      decoration: const InputDecoration(labelText: "γ Angle"),
+                      decoration: const InputDecoration(hintText: "γ Angle"),
                       keyboardType: TextInputType.number,
+                      initialValue: gammaAngle,
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
@@ -217,8 +230,9 @@ class StainParametersFormState extends State<StainParametersForm> {
                     width: 150,
                     height: 40,
                     child: TextFormField(
-                      decoration: const InputDecoration(labelText: "Y Coord."),
+                      decoration: const InputDecoration(hintText: "Y Coord."),
                       keyboardType: TextInputType.number,
+                      initialValue: yCoord,
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
@@ -240,8 +254,9 @@ class StainParametersFormState extends State<StainParametersForm> {
                     width: 150,
                     height: 40,
                     child: TextFormField(
-                      decoration: const InputDecoration(labelText: "Z Coord."),
+                      decoration: const InputDecoration(hintText: "Z Coord."),
                       keyboardType: TextInputType.number,
+                      initialValue: zCoord,
                       validator: (value) {
                         if (value == null ||
                             value.isEmpty ||
@@ -278,6 +293,7 @@ class StainParametersFormState extends State<StainParametersForm> {
                     width: 200,
                     child: DropdownButtonFormField<stain_comment>(
                       hint: const Text("Comment"),
+                      value: data.stains[stainID - 1].comment,
                       items: const [
                         DropdownMenuItem<stain_comment>(
                           value: stain_comment.none,
@@ -312,6 +328,7 @@ class StainParametersFormState extends State<StainParametersForm> {
     if (_formKey.currentState!.validate()) {
       // if form is valid, save dataset to csv file, then go to next page
       // first create the text string that will be written to the file
+      String filename = data.teamName + "_" + data.patternID + ".csv";
       String fileText = "Number of data points:" +
           data.numStains.toString() +
           ":\n" +
@@ -338,30 +355,9 @@ class StainParametersFormState extends State<StainParametersForm> {
       }
 
       // write the actual file
-      writeFile(fileText);
+      FileManager.writeFile(filename, fileText);
       return true;
     }
     return false;
   } // --- End processForm function
-
-  // get documents directory path
-  static Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-    return directory.path;
-  }
-
-  // set local file path
-  static Future<File> get _localFile async {
-    final path = await _localPath;
-    String filepath = "$path/" + data.teamName + "_" + data.patternID + ".csv";
-    return File(filepath).create(recursive: true);
-  }
-
-  // write data to file
-  static Future<File> writeFile(String data) async {
-    final file = await _localFile;
-
-    // Write the file
-    return file.writeAsString(data);
-  }
 } // --- End StainParametersFormState
