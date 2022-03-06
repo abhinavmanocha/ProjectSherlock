@@ -63,7 +63,7 @@ class SherlockApp extends StatelessWidget {
                                     'Open',
                                     softWrap: true,
                                     style: TextStyle(
-                                      color: Colors.red,
+                                      color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -74,6 +74,11 @@ class SherlockApp extends StatelessWidget {
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               const DataMode()),
+                                    );
+                                    shape:
+                                    new RoundedRectangleBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(10.0),
                                     );
                                   },
                                 );

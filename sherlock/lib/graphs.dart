@@ -61,77 +61,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
               ),
               Container(
-                child: Echarts(
-                  //extensions: [glScript],
-                  captureAllGestures: true,
-                  option: '''
-                    {
-                        tooltip: {},
-    visualMap: {
-        max: 10,
-        inRange: {
-            color: ['#184ba3', '#ff0000']
-        }
-    },
-    xAxis3D: {
-        xAxis.position: top,
-        type: 'category',
-        data: ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
-        '7a', '8a', '9a','10a','11a',
-        '12p', '1p', '2p', '3p', '4p', '5p',
-        '6p', '7p', '8p', '9p', '10p', '11p']
-    },
-    yAxis3D: {
-        
-        type: 'category',
-        data: ['0', '20', '30','40', '50', '60', '70']
-    },
-    zAxis3D: {
-       
-        type: 'value'
-    },
-    grid3D: {
-        boxWidth: 300,
-        boxDepth: 90,
-        viewControl: {
-        },
-        light: {
-            main: {
-                intensity: 1.5,
-                shadow: true
-            },
-            ambient: {
-                intensity: 0.3
-            }
-        }
-    },
-    series: [{
-        type: 'scatter3D',
-        data: [[3,6,18],[10,15,3],[3,4,18],[6,2,4],[7,0,12],[8,6,2],[5,4,3],[2,1,0],[0,1,2],[3,4,5]].map(function (item) {
-            return {
-                value: [item[1], item[0], item[2]],
-            }
-        }),
-        shading: 'lambert',
-
-        label: {
-            fontSize: 14,
-            borderWidth: 1
-        },
-
-        emphasis: {
-            label: {
-                fontSize: 20,
-                color: '#900'
-            },
-            itemStyle: {
-                color: '#000'
-            }
-        }
-    }]
-                    }
-                  ''',
-                ),
+                child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
+                    color: Color.fromARGB(255, 200, 255, 216),
+                    child: Center(
+                      child: Text("Standard String Chart",
+                          textAlign: TextAlign.center),
+                    )),
                 width: 300,
                 height: 250,
               ),
@@ -146,76 +83,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       style: TextStyle(color: Colors.grey)),
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0)),
               Container(
-                child: Echarts(
-                  //extensions: [glScript],
-                  captureAllGestures: true,
-                  option: '''
-                    {
-                        tooltip: {},
-    visualMap: {
-        max: 10,
-        inRange: {
-            color: ['#184ba3', '#ff0000']
-        }
-    },
-    xAxis3D: {
-        xAxis.position: top,
-        type: 'category',
-        data: ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
-        '7a', '8a', '9a','10a','11a',
-        '12p', '1p', '2p', '3p', '4p', '5p',
-        '6p', '7p', '8p', '9p', '10p', '11p']
-    },
-    yAxis3D: {
-        
-        type: 'category',
-        data: ['0', '20', '30','40', '50', '60', '70']
-    },
-    zAxis3D: {
-       
-        type: 'value'
-    },
-    grid3D: {
-        boxWidth: 300,
-        boxDepth: 90,
-        viewControl: {
-        },
-        light: {
-            main: {
-                intensity: 1.5,
-                shadow: true
-            },
-            ambient: {
-                intensity: 0.3
-            }
-        }
-    },
-    series: [{
-        type: 'scatter3D',
-        data: [[3,6,18],[10,15,3],[3,4,18],[6,2,4],[7,0,12],[8,6,2],[5,4,3],[2,1,0],[0,1,2],[3,4,5]].map(function (item) {
-            return {
-                value: [item[1], item[0], item[2]],
-            }
-        }),
-        shading: 'lambert',
-
-        label: {
-            fontSize: 14,
-            borderWidth: 1
-        },
-
-        emphasis: {
-            label: {
-                fontSize: 20,
-                color: '#900'
-            },
-            itemStyle: {
-                color: '#000'
-            }
-        }
-    }]
-                    }
-                  ''',
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0)),
+                  color: Color.fromARGB(255, 200, 255, 216),
+                  child: Center(
+                    child: Text("Point-of-Origin Estimation Chart",
+                        textAlign: TextAlign.center),
+                  ),
                 ),
                 width: 300,
                 height: 250,
