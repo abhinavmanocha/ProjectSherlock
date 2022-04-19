@@ -52,19 +52,15 @@ class _DataModePageState extends State<DataModePage> {
     return Scaffold(
       body: Center(
         child: Column(
-          // The main axis is the vertical axis for Columns.
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 4.0),
-              child: Text(
-                'Sherlock',
-                softWrap: true,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40,
-                ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Image.asset(
+                'images/sherlock_logo_white-removebg-preview.png',
+                width: 300.0,
+                height: 300.0,
+                fit: BoxFit.contain,
               ),
             ),
             const Padding(
@@ -95,10 +91,10 @@ class _DataModePageState extends State<DataModePage> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(20),
-                          primary: Colors.indigoAccent,
-                          onPrimary: Colors.white,
-                          minimumSize: const Size(200.0, 20.0),
+                        padding: const EdgeInsets.all(20),
+                        primary: Colors.indigoAccent,
+                        onPrimary: Colors.white,
+                        minimumSize: const Size(200.0, 20.0),
                       ),
                     ),
                   ),
@@ -112,10 +108,10 @@ class _DataModePageState extends State<DataModePage> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(20),
-                        primary: Colors.indigo,
-                        onPrimary: Colors.white,
-                        minimumSize: const Size(200.0, 20.0),
+                      padding: const EdgeInsets.all(20),
+                      primary: Colors.indigo,
+                      onPrimary: Colors.white,
+                      minimumSize: const Size(200.0, 20.0),
                     ),
                   ),
                 ],
