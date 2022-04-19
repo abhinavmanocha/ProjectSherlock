@@ -22,18 +22,15 @@ class SherlockApp extends StatelessWidget {
               horizontal: 32.0,
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 8.0),
-                  child: Text(
-                    'Sherlock',
-                    softWrap: true,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Image.asset(
+                    'images/sherlock_logo_green.png',
+                    width: 300.0,
+                    height: 300.0,
+                    fit: BoxFit.contain,
                   ),
                 ),
                 const Padding(
@@ -69,8 +66,6 @@ class SherlockApp extends StatelessWidget {
                     },
                   ),
                 ),
-
-                
               ],
             ),
           ),
@@ -79,6 +74,3 @@ class SherlockApp extends StatelessWidget {
     );
   }
 }
-
-
-
