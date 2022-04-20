@@ -60,7 +60,7 @@ class SherlockApp extends StatelessWidget {
                               builder: (context) {
                                 return ElevatedButton(
                                   child: const Text(
-                                    'Open',
+                                    'OPEN',
                                     softWrap: true,
                                     style: TextStyle(
                                       color: Colors.black,
@@ -68,6 +68,10 @@ class SherlockApp extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.red)),
                                   onPressed: () {
                                     Navigator.push(
                                       context,

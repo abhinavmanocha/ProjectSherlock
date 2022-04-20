@@ -95,10 +95,10 @@ class _DataModePageState extends State<DataModePage> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(20),
-                          primary: Colors.indigoAccent,
-                          onPrimary: Colors.white,
-                          minimumSize: const Size(200.0, 20.0),
+                        padding: const EdgeInsets.all(20),
+                        primary: Colors.teal[900],
+                        onPrimary: Colors.white,
+                        minimumSize: const Size(200.0, 20.0),
                       ),
                     ),
                   ),
@@ -112,10 +112,10 @@ class _DataModePageState extends State<DataModePage> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(20),
-                        primary: Colors.indigo,
-                        onPrimary: Colors.white,
-                        minimumSize: const Size(200.0, 20.0),
+                      padding: const EdgeInsets.all(20),
+                      primary: Colors.teal[900],
+                      onPrimary: Colors.white,
+                      minimumSize: const Size(200.0, 20.0),
                     ),
                   ),
                 ],

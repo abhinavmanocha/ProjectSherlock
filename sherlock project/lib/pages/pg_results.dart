@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sherlock/models/chart.dart';
-
+import 'package:expandable/expandable.dart';
+import 'package:flutter/cupertino.dart';
 import 'pg_chart.dart';
 import '../models/blood_sample.dart';
 import '../models/output.dart';
@@ -78,18 +79,18 @@ class ResultsPage extends StatelessWidget {
         foregroundColor: Colors.black,
       ),
       floatingActionButton: ElevatedButton(
-                  child: const Text("View Graphs"),
-                  style: ElevatedButton.styleFrom(primary: Colors.teal),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ChartPage(chartInfo: processor.chartInfo),),
-                    );
-                  },
-                ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,      
+        child: const Text("View Graphs"),
+        style: ElevatedButton.styleFrom(primary: Colors.teal[900]),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChartPage(chartInfo: processor.chartInfo),
+            ),
+          );
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(

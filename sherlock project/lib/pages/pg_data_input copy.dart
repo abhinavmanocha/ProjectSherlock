@@ -266,7 +266,7 @@ class _BloodDataFormState_BAK extends State<BloodDataForm_BAK> {
               //color: Colors.grey[850],
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.blue,
+                  color: Colors.teal,
                 ),
                 borderRadius: const BorderRadius.all(
                   Radius.circular(15),

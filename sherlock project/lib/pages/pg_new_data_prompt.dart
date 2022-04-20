@@ -57,7 +57,7 @@ class _NewDataFormState extends State<NewDataForm> {
           patternId: patternId,
           stainCount: stainCount,
           filename: filename);
-          
+
       sample.teamInfo = true;
       sample.initBloodStains();
 
@@ -183,7 +183,7 @@ class _NewDataFormState extends State<NewDataForm> {
                     ),
                     child: Ink(
                       decoration: const ShapeDecoration(
-                        color: Colors.teal,
+                        color: Color.fromARGB(255, 0, 77, 64),
                         shape: CircleBorder(),
                       ),
                       child: IconButton(

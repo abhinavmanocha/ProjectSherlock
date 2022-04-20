@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_echarts/flutter_echarts.dart';
-//import 'gl_script.dart' show glScript;
 import 'package:expandable/expandable.dart';
 
 void main() => runApp(MyApp());

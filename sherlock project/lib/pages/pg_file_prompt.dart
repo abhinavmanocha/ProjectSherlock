@@ -116,7 +116,7 @@ class _LoadFileBodyFormState extends State<LoadFileBodyForm> {
                 onPressed: _submitForm,
                 child: const Text('Load File'),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.teal,
+                  primary: Colors.teal[900],
                   onPrimary: Colors.white,
                   padding: const EdgeInsets.all(20),
                   minimumSize: const Size(200, 20),
