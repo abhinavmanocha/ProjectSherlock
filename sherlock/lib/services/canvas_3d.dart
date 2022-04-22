@@ -123,13 +123,7 @@ class Canvas3D extends CustomPainter {
           width: shape['size'] * 2.0,
           height: shape['size'] * 2.0));
 
-      // path.addArc(
-      //     Rect.fromCenter(
-      //         center: Offset(coord[0].toDouble(), coord[1].toDouble()),
-      //         width: shape['size'] * 2.0,
-      //         height: shape['size'] * 2.0),
-      //     0,
-      //     2.0 * pi);
+     
       canvas.drawPath(path, paint);
     }
   }
