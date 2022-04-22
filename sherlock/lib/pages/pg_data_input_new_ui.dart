@@ -121,13 +121,9 @@ class BloodDataForm extends StatefulWidget {
   }
 }
 
-// This class holds data related to the form.
+//creating a form using GlobalKey
 class BloodDataFormState extends State<BloodDataForm> {
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
-  //
-  // Note: This is a `GlobalKey<FormState>`,
-  // not a GlobalKey<MyCustomFormState>.
+ 
   final _formKey = GlobalKey<FormState>();
 
   @override
