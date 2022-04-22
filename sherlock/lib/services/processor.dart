@@ -1,3 +1,4 @@
+//bsa_data.pl
 import 'dart:math';
 
 import 'package:intl/intl.dart';
@@ -74,12 +75,7 @@ class DataProcessor {
   }
 
   validateStains() async {
-//
-// If the y and z coordinates are given, assume the whole row of data is valid.
-//
-// Count how many Stains contain valid data. Each Stain represents a single blood stain and it's "string"
-//
-//
+
 
     params.yNPoints = 0;
     for (int i = 0; i < params.sample.numStains; i++) {
@@ -115,17 +111,9 @@ class DataProcessor {
         }
 
         params.yNPoints++;
-      } // if we want to include this point in the determination of the AO
+      } 
 
-//
-//    move the form data into the appropriate variables.
-//
 
-      ///<-- TO DELETE:
-      ///$impact_angle[$i] =  radians($alpha[$i]);  // we may change this to Fred's BETA angle as discussed in his 2001 paper.
-
-      ///<-- TO DELETE:
-      /// $gamma_angle[$i]  =  radians(params.sample.bloodStains[i].gamma);
 
     }
   } // end sub validate_Stains
