@@ -851,19 +851,7 @@ class DataProcessor {
   } // End sub calc_AO_Z_value
 
   Future<List<Output>> displayResults() async {
-//
-//  ------------------------------------------------------------------------------------------------------
-//
-//    At this point, we have calculated all of the required information. We have all of the intersection points of
-//   all of the line segments. We also have an averaged out centroid for all of the intersection points. We have
-//   also estimated the height of the Point-of-Origin (PO) for each of the blood stains and calculated an average height
-//   for the PO.
-//
 
-//
-//  We now display back to the user, the results of our analysis. We rebuild the original table
-//  adding columns for the distance to the convergence point and the individual calculated impact heights.
-//
     List<Output> outputs = [];
 
     outputs.add(Output("Stain Parameters:", type: Output.title)); //<h2>
@@ -899,9 +887,7 @@ class DataProcessor {
         "  Y = ${f.format(params.convergenceY)} [${f.format(params.cpYStd)}]\n"
         "  Y = ${f.format(params.convergenceZ)} [${f.format(params.cpZStd)}]\n"));
 
-    // var href1 = $HttpRoot . $HTTPimgRoot . $FileStub . "_coordinates_metod1.csv";
-    // outputs.add(Output("<p> <P>Coordinate Details: <a href=\"$href1\"></a><P>\n\n"));
-
+    
     String filename = params.sample.filename!.replaceAll('.csv', '');
     filename += '_coordinates_metod1.csv';
     outputs
