@@ -85,17 +85,7 @@ class ChartInfo {
     return [x + shift_size, y + shift_size, z + shift_size];
   } // end _shiftPlot
 
-  //---------------------------------------------------------------------------------------------
-  //
-  //  The plot_2d_chart routine is used to draw the "strings" required for the analysis. The strings
-  //  start at each blood stain and are drawn according to the gamma angle supplied by the user. The
-  //  strings are drawn from the stain until the string extends beyond the borders of the chart. At
-  //  that time, the strings are "clipped" to fit into the chart.
-  //
-  //  The "height" variable contains the estimated height in the Z direction of the AO.
-  //
-  //  We should have unique X,Y and Z coordinates for each stain's origin. We can also calculate
-  //  additional coordinates along the line so we can draw the string.
+ 
 
   Future<List<Output>> plot_2d_chart() async {
     List<Output> outputs = [];
@@ -192,8 +182,8 @@ class ChartInfo {
     //   plotting the view of the X-y plane with no Z coordinates for the line (to find the common
     //   point of intersection) to specify the X coordinate of the AO)
     //
-    //  This is a 2-D plot (even though you can rotate it in 3D
-    //
+    //  a 2-D plot (even though you can rotate it in 3D
+  
     for (var i = 0; i < params.sample.numStains; i++) {
       var Py = params.sample.bloodStains[i].y;
       var dy = params.sample.bloodStains[i].deltaY;
@@ -707,5 +697,5 @@ class ChartInfo {
     }
 
     return outputs;
-  } // endsub plot_2d_chart ----------------------------------------------------------------------------------------------
+  } // endsub plot_2d_chart ---
 }
