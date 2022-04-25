@@ -56,12 +56,7 @@ class _DataModePageState extends State<DataModePage> {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
-              child: Image.asset(
-                'images/sherlock_logo_white-removebg-preview.png',
-                width: 300.0,
-                height: 300.0,
-                fit: BoxFit.contain,
-              ),
+              
             ),
             const Padding(
               padding: EdgeInsets.only(bottom: 10.0),

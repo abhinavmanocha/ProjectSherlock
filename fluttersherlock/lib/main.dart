@@ -26,16 +26,12 @@ class SherlockApp extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Image.asset(
-                    'images/sherlock_logo_green.png',
-                    width: 300.0,
-                    height: 300.0,
-                    fit: BoxFit.contain,
-                  ),
+                  
                 ),
                 const Padding(
                   padding: EdgeInsets.all(20),
                   child: Text(
+                    'Sherlock\n\n'
                     'NOTE: Sherlock was designed for student training purposes '
                     'only, we do not guarantee that the results are 100% accurate. '
                     'Trent University assumes no responsibility or liability should '
