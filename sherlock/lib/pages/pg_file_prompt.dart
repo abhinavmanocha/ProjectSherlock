@@ -81,7 +81,7 @@ class _LoadFileBodyFormState extends State<LoadFileBodyForm> {
             const Padding(
               padding: EdgeInsets.only(bottom: 16),
               child: Text(
-                'Pre-exisiting Datasets:',
+                'Pre-existing Datasets:',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),

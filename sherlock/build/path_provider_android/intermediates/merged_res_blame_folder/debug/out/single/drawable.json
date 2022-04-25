@@ -1,18 +1,18 @@
 [
     {
-        "merged": "/Users/takara/dev/ProjectSherlock/sherlock/build/path_provider_android/intermediates/res/merged/debug/drawable/notification_bg_low.xml",
-        "source": "/Users/takara/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/res/drawable/notification_bg_low.xml"
+        "merged": "C:\\Users\\sarah\\OneDrive\\TrentUniversity\\Year4\\Fall 2021\\COIS 4000 - Fall\\Project Sherlock_fall\\ProjectSherlock\\sherlock\\build\\path_provider_android\\intermediates\\res\\merged\\debug\\drawable\\notification_bg.xml",
+        "source": "C:\\Users\\sarah\\.gradle\\caches\\transforms-2\\files-2.1\\bf57ee6ef03cef43525091c12acf6534\\core-1.6.0\\res\\drawable\\notification_bg.xml"
     },
     {
-        "merged": "/Users/takara/dev/ProjectSherlock/sherlock/build/path_provider_android/intermediates/res/merged/debug/drawable/notification_bg.xml",
-        "source": "/Users/takara/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/res/drawable/notification_bg.xml"
+        "merged": "C:\\Users\\sarah\\OneDrive\\TrentUniversity\\Year4\\Fall 2021\\COIS 4000 - Fall\\Project Sherlock_fall\\ProjectSherlock\\sherlock\\build\\path_provider_android\\intermediates\\res\\merged\\debug\\drawable\\notification_bg_low.xml",
+        "source": "C:\\Users\\sarah\\.gradle\\caches\\transforms-2\\files-2.1\\bf57ee6ef03cef43525091c12acf6534\\core-1.6.0\\res\\drawable\\notification_bg_low.xml"
     },
     {
-        "merged": "/Users/takara/dev/ProjectSherlock/sherlock/build/path_provider_android/intermediates/res/merged/debug/drawable/notification_tile_bg.xml",
-        "source": "/Users/takara/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/res/drawable/notification_tile_bg.xml"
+        "merged": "C:\\Users\\sarah\\OneDrive\\TrentUniversity\\Year4\\Fall 2021\\COIS 4000 - Fall\\Project Sherlock_fall\\ProjectSherlock\\sherlock\\build\\path_provider_android\\intermediates\\res\\merged\\debug\\drawable\\notification_icon_background.xml",
+        "source": "C:\\Users\\sarah\\.gradle\\caches\\transforms-2\\files-2.1\\bf57ee6ef03cef43525091c12acf6534\\core-1.6.0\\res\\drawable\\notification_icon_background.xml"
     },
     {
-        "merged": "/Users/takara/dev/ProjectSherlock/sherlock/build/path_provider_android/intermediates/res/merged/debug/drawable/notification_icon_background.xml",
-        "source": "/Users/takara/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/res/drawable/notification_icon_background.xml"
+        "merged": "C:\\Users\\sarah\\OneDrive\\TrentUniversity\\Year4\\Fall 2021\\COIS 4000 - Fall\\Project Sherlock_fall\\ProjectSherlock\\sherlock\\build\\path_provider_android\\intermediates\\res\\merged\\debug\\drawable\\notification_tile_bg.xml",
+        "source": "C:\\Users\\sarah\\.gradle\\caches\\transforms-2\\files-2.1\\bf57ee6ef03cef43525091c12acf6534\\core-1.6.0\\res\\drawable\\notification_tile_bg.xml"
     }
 ]
