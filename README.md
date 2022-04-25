@@ -10,3 +10,8 @@ The application will allow students to input their BSA data points to determine 
 ## Measurement: 
 Success of this system will be decided by the accuracy of the application while conducting calculations offline. Further indicators of the system performance will be the dependability of the software when operated by many users at the same time.
 
+## Features & Capabilities: 
+- Input data for up to 20 stains to create a new dataset
+- Save a dataset to work on again in the future
+- Load a saved dataset and edit the stain data
+- Process a dataset and display interactive Standard String and Point-of-Origin Estimation charts (can be rotated, zoomed in, viewed at a preferred axis in a 3D space, etc.)
